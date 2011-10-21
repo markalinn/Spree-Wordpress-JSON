@@ -1,0 +1,7 @@
+<div style="width:500px;">
+	<h3><%= @post.title %></h3>
+	By <%= raw @post.author["name"] %> on <%= raw @post.date %><br/>
+	<p>
+	<%= raw @post.content %>
+	</p>
+</div>

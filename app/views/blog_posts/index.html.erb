@@ -1,0 +1,3 @@
+<% @posts.each do |post| %>
+	<%= link_to((raw post["title"]), blog_post_url(post["id"])) %><br />
+<% end %>
