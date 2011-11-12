@@ -1,6 +1,5 @@
 require 'spree_core'
 require 'spree_wordpress_json_hooks'
-
 module SpreeWordpressJson
   class Engine < Rails::Engine
 
