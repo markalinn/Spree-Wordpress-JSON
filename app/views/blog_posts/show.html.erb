@@ -1,6 +1,6 @@
-<div style="width:500px;">
+<div id="blog_post" style="width:500px; margin-bottom:25px;">
 	<h3><%= @post.title %></h3>
-	By <%= raw @post.author["name"] %> on <%= raw @post.date %><br/>
+	<span>By <%= link_to(@post.author["name"], blog_posts_url(:author => @post.author["id"])) %> on <%= raw @post.date.to_date.strftime('%b %d, %Y') %></span>
 	<p>
 	<%= raw @post.content %>
 	</p>
