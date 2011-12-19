@@ -9,7 +9,7 @@
 		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
 		<span>By <%= link_to(post["author"]["name"], blog_posts_url(:author => post["author"]["id"])) %> on <%= raw post["date"].to_date.strftime('%b %d, %Y') %></span>
 		<br />
-		<%= raw post["excerpt"].split('&hellip;')[0] %>
+		<%= raw post["excerpt"].split('&hellip;')[0].split('<a ')[0] %>
 		&hellip;
 		<%= link_to('more',blog_post_url(post["id"])) %>	
 		</div>
@@ -24,7 +24,7 @@
 	<div id="blog_categories" style="width:200px;float:left;margin-bottom:25px;">
 	<h3>Categories</h3>
 	<% @categories.each do |category| %>
-		<%= link_to((raw category["title"]), blog_posts_url(:category => category["id"])) %><br />
+		<%= link_to((raw category["title"]), blog_posts_url(:cat => category["id"])) %><br />
 	<% end %>
 	</div>
 </div>

@@ -6,7 +6,14 @@ class BlogPostsController < Spree::BaseController
      @categories = []
      base_url = WORDPRESS_CONFIG['url']
 
-     blog_url = "#{base_url}?json=1&author=#{params[:author]}&page=#{params[:page]}"
+     blog_url = "#{base_url}?json=1"
+     if params[:cat]
+       blog_url = blog_url + "&cat=#{params[:cat]}"
+     end
+     if params[:author]
+       blog_url = blog_url + "&author=#{params[:author]}"
+     end
+     blog_url = blog_url + "&page=#{params[:page]}"
      blog_resp = Net::HTTP.get_response(URI.parse(blog_url))
      blog_data = blog_resp.body
      blog_hash = ActiveSupport::JSON.decode(blog_data)
