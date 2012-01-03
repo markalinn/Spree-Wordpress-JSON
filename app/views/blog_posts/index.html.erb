@@ -9,7 +9,7 @@
 		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
 		<span>By <%= link_to(post["author"]["name"], blog_posts_url(:author => post["author"]["id"])) %> on <%= raw post["date"].to_date.strftime('%b %d, %Y') %></span>
 		<br />
-		<%= raw post["excerpt"].split('&hellip;')[0].split('<a ')[0] %>
+		<%= raw post["excerpt"].split('&hellip;')[0].split('<a ')[0] if ! post["excerpt"].blank?%>
 		&hellip;
 		<%= link_to('more',blog_post_url(post["id"])) %>	
 		</div>

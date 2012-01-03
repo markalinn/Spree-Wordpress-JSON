@@ -5,3 +5,33 @@
 	<%= raw @post.content %>
 	</p>
 </div>
+<br clear="all"/>
+<div id="comments" style="width:500px; margin-top:25px; margin-bottom:15px;">
+	<h3>
+		<%= @comments.count %> thoughts on &quot;<%= @post.title %>&quot;
+	</h3>
+	<ul>
+	<% @comments.each do |comment| %>
+	<li id="comment">
+	<%= comment["name"] %>
+	<%= comment["date"] %>
+	<%= raw comment["content"] %>
+	</li>
+	<% end %>
+	</ul>
+</div>
+<br clear="all"/>
+<div id="comment-form" style="width:500px; margin-bottom:15px;">
+	<h3>
+		Leave a reply
+	</h3>
+<%= form_for(:comment, :url => add_comment_blog_post_url) do |f| %>
+  <table class="basic-table">
+    <%= render :partial => "form", :locals => { :f => f } %>
+  </table>
+  <p class="form-buttons">
+    <%= f.submit 'Add Comment' %>
+  </p>
+<% end %>
+	
+</div>

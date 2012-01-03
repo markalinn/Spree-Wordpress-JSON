@@ -46,9 +46,38 @@ class BlogPostsController < Spree::BaseController
      data = resp.body
      blog_hash = ActiveSupport::JSON.decode(data)
      @post = OpenStruct.new(blog_hash["post"])
+     @comments = @post.comments
 
     respond_to do |format|
       format.html # index.html.erb
     end
+  end
+  
+  def add_comment
+     base_url = WORDPRESS_CONFIG['url'] + "?json=submit_comment"
+     base_url = base_url + "&post_id="
+     base_url = base_url + URI.escape(params[:id])
+     base_url = base_url + "&name="
+     base_url = base_url + URI.escape(params[:comment][:name])
+     base_url = base_url + "&email="
+     base_url = base_url + URI.escape(params[:comment][:email])
+     base_url = base_url + "&url="
+     base_url = base_url + URI.escape(params[:comment][:url])
+     base_url = base_url + "&content="
+     base_url = base_url + URI.escape(params[:comment][:content])
+     resp = Net::HTTP.get_response(URI.parse(base_url))
+     data = resp.body
+     comment = ActiveSupport::JSON.decode(data)
+     if comment["status"] == "pending"
+       flash[:notice] = 'Your comment is pending approval'
+     elsif comment["status"] == "error"
+       flash[:notice] = comment["error"]
+     else
+       flash[:notice] = 'Your comment has been added!'
+     end
+      respond_to do |format|
+        format.html { redirect_to blog_post_url(params[:id]) }
+      end
+           
   end
 end

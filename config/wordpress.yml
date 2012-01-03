@@ -1,0 +1,6 @@
+test:
+  url: "http://localhost/wordpress/"
+development:
+  url: "http://localhost/wordpress/"
+production:
+  url: "http://localhost/wordpress/"
