@@ -25,14 +25,14 @@ class BlogPostsController < Spree::BaseController
      authors_data = authors_resp.body
      authors_hash = ActiveSupport::JSON.decode(authors_data)
      blog_authors = OpenStruct.new(authors_hash)
-     @authors = blog_authors.authors if ! blog.authors.blank?
+     @authors = blog_authors.authors if ! blog_authors.authors.blank?
 
      categories_url = "#{base_url}?json=get_category_index&page=#{params[:page]}"
      categories_resp = Net::HTTP.get_response(URI.parse(categories_url))
      categories_data = categories_resp.body
      categories_hash = ActiveSupport::JSON.decode(categories_data)
      blog_categories = OpenStruct.new(categories_hash)
-     @categories = blog_categories.categories if ! blog.authors.blank?
+     @categories = blog_categories.categories if ! blog_categories.categories.blank?
 
     respond_to do |format|
       format.html # index.html.erb
