@@ -2,7 +2,7 @@
 	<div id="blog_posts" style="float:left;width:550px;">
 	<% @posts.each do |post| %>
 		<div id="blog_post" style="width:500px; margin-bottom:25px;">
-		<% if post["attachments"].size > 0 %>
+		<% if post["attachments"].size > 0 && ! post["attachments"][0].nil? && ! post["attachments"][0]["images"].blank? %>
 			<%= image_tag(raw post["attachments"][0]["images"]["post-thumbnail"]["url"]) %><br/>
 			<br />
 		<% end %>
