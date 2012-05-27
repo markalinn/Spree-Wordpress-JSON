@@ -18,6 +18,8 @@ class BlogPostsController < Spree::BaseController
      blog_data = blog_resp.body
      blog_hash = ActiveSupport::JSON.decode(blog_data)
      blog = OpenStruct.new(blog_hash)
+     blog_pages_array = ('1'..blog.pages.to_s).to_a
+     @blog_pages = blog_pages_array.paginate(:per_page => 1, :page => params[:page])
      @posts = blog.posts if ! blog.posts.blank?
 
      authors_url = "#{base_url}?json=get_author_index&page=#{params[:page]}"

@@ -1,14 +1,15 @@
 <div id="blog_post" style="width:500px; margin-bottom:25px;">
-	<h3><%= @post.title %></h3>
+	<h3><%= raw @post.title %></h3>
 	<span>By <%= link_to(@post.author["name"], blog_posts_url(:author => @post.author["id"])) %> on <%= raw @post.date.to_date.strftime('%b %d, %Y') %></span>
 	<p>
 	<%= raw @post.content %>
 	</p>
+<hr />
 </div>
 <br clear="all"/>
 <div id="comments" style="width:500px; margin-top:25px; margin-bottom:15px;">
 	<h3>
-		<%= @comments.count %> thoughts on &quot;<%= @post.title %>&quot;
+		<%= @comments.count %> thoughts on &quot;<%= raw @post.title %>&quot;
 	</h3>
 	<ul>
 	<% @comments.each do |comment| %>

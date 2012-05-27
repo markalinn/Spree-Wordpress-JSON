@@ -1,7 +1,12 @@
 <div id="blog_container" style="width:750px;">
 	<div id="blog_posts" style="float:left;width:550px;">
+	<% if @blog_pages.respond_to?(:total_pages) %>
+		<%= will_paginate(@blog_pages,
+		                    :previous_label => "&#171; #{t('previous')}",
+		                    :next_label => "#{t('next')} &#187;") %>
+	<% end %>
 	<% @posts.each do |post| %>
-		<div id="blog_post" style="width:500px; margin-bottom:25px;">
+		<div id="blog_post">
 		<% if post["attachments"].size > 0 && ! post["attachments"][0].nil? && ! post["attachments"][0]["images"].blank? %>
 			<%= image_tag(raw post["attachments"][0]["images"]["post-thumbnail"]["url"]) %><br/>
 			<br />
@@ -13,6 +18,11 @@
 		&hellip;
 		<%= link_to('more',blog_post_url(post["id"])) %>	
 		</div>
+	<% end %>
+	<% if @blog_pages.respond_to?(:total_pages) %>
+		<%= will_paginate(@blog_pages,
+		                    :previous_label => "&#171; #{t('previous')}",
+		                    :next_label => "#{t('next')} &#187;") %>
 	<% end %>
 	</div>
 	<div id="blog_authors" style="width:200px;float:left;margin-bottom:25px;">
@@ -27,4 +37,5 @@
 		<%= link_to((raw category["title"]), blog_posts_url(:cat => category["id"])) %><br />
 	<% end %>
 	</div>
+
 </div>
