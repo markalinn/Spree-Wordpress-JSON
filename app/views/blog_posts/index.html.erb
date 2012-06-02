@@ -8,7 +8,7 @@
 	<% @posts.each do |post| %>
 		<div id="blog_post">
 		<% if post["attachments"].size > 0 && ! post["attachments"][0].nil? && ! post["attachments"][0]["images"].blank? %>
-			<%= image_tag(raw post["attachments"][0]["images"]["post-thumbnail"]["url"]) %><br/>
+			<%= link_to(image_tag(raw post["attachments"][0]["images"]["post-thumbnail"]["url"]), blog_post_url(post["id"])) %><br/>
 			<br />
 		<% end %>
 		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
