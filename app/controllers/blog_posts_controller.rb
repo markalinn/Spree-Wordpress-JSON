@@ -6,7 +6,12 @@ class BlogPostsController < Spree::BaseController
      @categories = []
      base_url = WORDPRESS_CONFIG['url']
 
-     blog_url = "#{base_url}?json=1"
+     blog_url = "#{base_url}"
+     if params[:date]
+       blog_url = blog_url + "?json=get_date_posts&&date=#{params[:date]}"
+     else
+       blog_url = blog_url + "?json=1"
+     end
      if params[:cat]
        blog_url = blog_url + "&cat=#{params[:cat]}"
      end

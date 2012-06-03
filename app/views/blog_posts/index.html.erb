@@ -37,5 +37,13 @@
 		<%= link_to((raw category["title"]), blog_posts_url(:cat => category["id"])) %><br />
 	<% end %>
 	</div>
+	<div id="blog_archive" style="width:200px;float:left;margin-bottom:25px;">
+	<h3>Archive</h3>
+	<% (Date.today-2.years..Date.today).sort{|x,y| y <=> x }.each do |date| %>
+		<% if date.day == 1 %> 
+			<%= link_to date.strftime('%B %Y'), blog_posts_url(:date => date.strftime('%Y-%m')) %><br />
+		<% end %>
+	<% end %>
+	</div>
 
 </div>
