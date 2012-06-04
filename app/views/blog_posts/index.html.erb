@@ -1,5 +1,6 @@
 <div id="blog_container" style="width:750px;">
 	<div id="blog_posts" style="float:left;width:550px;">
+	<h2>BLOG</h2>
 	<% if @blog_pages.respond_to?(:total_pages) %>
 		<%= will_paginate(@blog_pages,
 		                    :previous_label => "&#171; #{t('previous')}",
@@ -7,18 +8,21 @@
 	<% end %>
 	<% @posts.each do |post| %>
 		<div id="blog_post">
+		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
+		<span>By <%= link_to(post["author"]["name"], blog_posts_url(:author => post["author"]["id"])) %> on <%= raw post["date"].to_date.strftime('%b %d, %Y') %></span>
+		<br />
 		<% if post["attachments"].size > 0 && ! post["attachments"][0].nil? && ! post["attachments"][0]["images"].blank? %>
 			<%= link_to(image_tag(raw post["attachments"][0]["images"]["post-thumbnail"]["url"]), blog_post_url(post["id"])) %><br/>
 			<br />
 		<% end %>
-		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
-		<span>By <%= link_to(post["author"]["name"], blog_posts_url(:author => post["author"]["id"])) %> on <%= raw post["date"].to_date.strftime('%b %d, %Y') %></span>
-		<br />
 		<%= raw post["excerpt"].split('&hellip;')[0].split('<a ')[0] if ! post["excerpt"].blank?%>
 		&hellip;
-		<%= link_to('more',blog_post_url(post["id"])) %>	
+		<%= link_to('more',blog_post_url(post["id"])) %><br/>
+		<div class="hr">
+			<hr style="display:none;" />
 		</div>
-	<% end %>
+		</div>
+ 	<% end %>
 	<% if @blog_pages.respond_to?(:total_pages) %>
 		<%= will_paginate(@blog_pages,
 		                    :previous_label => "&#171; #{t('previous')}",
