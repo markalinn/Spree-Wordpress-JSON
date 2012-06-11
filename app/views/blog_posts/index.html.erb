@@ -13,7 +13,7 @@
 		                    :next_label => "#{t('next')} &#187;") %>
 	<% end %>
 	<% @posts.each do |post| %>
-		<div id="blog_post">
+		<div id="blog_post_listing">
 		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
 		<span>By <%= link_to(post["author"]["name"], blog_posts_url(:author => post["author"]["id"])) %> on <%= raw post["date"].to_date.strftime('%b %d, %Y') %></span>
 		<br />
