@@ -1,6 +1,12 @@
 <div id="blog_container" style="width:750px;">
 	<div id="blog_posts" style="float:left;width:550px;">
 	<h2>BLOG</h2>
+	<div id="blog_search">
+		<% form_tag(blog_posts_url, :method=> :get) do %>
+			<%= text_field_tag 'search', params[:search], :id => 'keywords', :value => 'Search this blog...', :onFocus => "this.value = '';",  :onBlur => "if (this.value == '') {this.value = 'Search this blog...';}"%>
+			<button type='submit' class='search'></button>
+		<% end %>
+	</div>
 	<% if @blog_pages.respond_to?(:total_pages) %>
 		<%= will_paginate(@blog_pages,
 		                    :previous_label => "&#171; #{t('previous')}",
