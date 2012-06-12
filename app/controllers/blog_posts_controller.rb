@@ -10,7 +10,7 @@ class BlogPostsController < Spree::BaseController
      if params[:date]
        blog_url = blog_url + "?json=get_date_posts&&date=#{params[:date]}"
      elsif params[:search]
-       blog_url = blog_url + "?json=get_search_results&search=#{params[:search]}"
+       blog_url = blog_url + "?json=get_search_results&search=#{params[:search].gsub(/\ /, '+')}"
      else
        blog_url = blog_url + "?json=1"
      end
