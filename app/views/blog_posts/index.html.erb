@@ -12,6 +12,7 @@
 		                    :previous_label => "&#171; #{t('previous')}",
 		                    :next_label => "#{t('next')} &#187;") %>
 	<% end %>
+	<div id="spacer"></div>
 	<% @posts.each do |post| %>
 		<div id="blog_post_listing">
 		<h3><%= link_to((raw post["title"]), blog_post_url(post["id"])) %></h3>
